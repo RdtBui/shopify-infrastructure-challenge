@@ -1,11 +1,12 @@
 require 'date'
 
 class PagesController < ApplicationController
-    before_action :generate_report, only: [:report]
+    # before_action :generate_report, only: [:report]
     def home
     end
     
     def report
+        @log = most_in_stock(2022, 1)
     end 
 
     private
@@ -32,10 +33,15 @@ class PagesController < ApplicationController
 
     end
 
-    def most_in_stock(items, month, year)
-        @most_in_stock_item = Item.where("created_at >= :start_date AND created_at <= :end_date", 
-            { start_date: params[:start_date], end_date: params[:end_date] })
+    def most_in_stock(year, month)
+        # Handle error if exits
 
-        @items.maximum("quantity")
+        start_date = DateTime.civil(year, month)
+        end_date = DateTime.civil(year, month, -1, -1, -1) # Last day of the month, at 11:59 pm
+
+        log = Log.where("created_at >= :start_date AND created_at <= :end_date", 
+            { start_date: start_date, end_date: end_date })
+
+        return log.order("item_quantity DESC").first
     end
 end

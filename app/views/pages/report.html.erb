@@ -15,10 +15,10 @@
   </div>
 <% end %>
 
-<% if @items.any? %>
-    <% @items.each do |item| %>
-        <%= item.title %>
-    <% end %>
-<% end %>
 
+
+<% if @log.nil? %>
+<% else %>
+    <%= @log.item_quantity %>
+<% end %>
 <%= @most_in_stock %>
