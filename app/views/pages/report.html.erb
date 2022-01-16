@@ -1,1 +1,24 @@
 <h1>This is the report page</h1>
+<%= form_with do |form| %>
+  <div class="field">
+    <%= form.label "Start Date" %>
+    <%= form.date_field :start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label "End Date" %>
+    <%= form.date_field :end_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<% if @items.any? %>
+    <% @items.each do |item| %>
+        <%= item.title %>
+    <% end %>
+<% end %>
+
+<%= @most_in_stock %>
