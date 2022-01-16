@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Item title:</strong>
+  <%= @log.item_title %>
+</p>
+
+<p>
+  <strong>Item sku:</strong>
+  <%= @log.item_sku %>
+</p>
+
+<p>
+  <strong>Item price:</strong>
+  <%= @log.item_price %>
+</p>
+
+<p>
+  <strong>Item quantity:</strong>
+  <%= @log.item_quantity %>
+</p>
+
+<p>
+  <strong>Item brand:</strong>
+  <%= @log.item_brand %>
+</p>
+
+<p>
+  <strong>String:</strong>
+  <%= @log.string %>
+</p>
+
+<p>
+  <strong>Item category:</strong>
+  <%= @log.item_category %>
+</p>
+
+<%= link_to 'Edit', edit_log_path(@log) %> |
+<%= link_to 'Back', logs_path %>

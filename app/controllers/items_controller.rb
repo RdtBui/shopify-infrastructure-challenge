@@ -25,6 +25,8 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
+        log_activity(@item)
+
         format.html { redirect_to item_url(@item), notice: "Item was successfully created." }
         format.json { render :show, status: :created, location: @item }
       else
@@ -38,6 +40,8 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
+        log_activity(@item)
+
         format.html { redirect_to item_url(@item), notice: "Item was successfully updated." }
         format.json { render :show, status: :ok, location: @item }
       else
@@ -67,4 +71,15 @@ class ItemsController < ApplicationController
     def item_params
       params.require(:item).permit(:title, :summary, :sku, :price, :quantity, :category, :brand)
     end
+
+    def log_activity(item)
+      log = Log.new(item_title: item.title, 
+                    item_sku: item.sku, 
+                    item_price: item.price, 
+                    item_quantity: item.quantity, 
+                    item_category: item.category, 
+                    item_brand: item.brand)
+      log.save
+    end
+    
 end

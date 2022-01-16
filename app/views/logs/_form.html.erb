@@ -1,0 +1,52 @@
+<%= form_with(model: log) do |form| %>
+  <% if log.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(log.errors.count, "error") %> prohibited this log from being saved:</h2>
+
+      <ul>
+        <% log.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :item_title %>
+    <%= form.text_field :item_title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_sku %>
+    <%= form.text_field :item_sku %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_price %>
+    <%= form.text_field :item_price %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_quantity %>
+    <%= form.number_field :item_quantity %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_brand %>
+    <%= form.text_field :item_brand %>
+  </div>
+
+  <div class="field">
+    <%= form.label :string %>
+    <%= form.text_field :string %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_category %>
+    <%= form.text_field :item_category %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
