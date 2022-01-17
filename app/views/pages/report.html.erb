@@ -15,8 +15,6 @@
   </div>
 <% end %>
 
-
-
 <%= "max quantity:" %>
 <% if @max_quantity_log.present? %>
     <%= @max_quantity_log.item_quantity %>
@@ -66,3 +64,9 @@
 <% if @min_revenue_log.present? %>
     <%= @min_revenue_log.item_quantity %>
 <% end%>
+
+<br/>
+<h1>hehehe</h1>
+<%= render plain: @report[:January]  %>
+
+<%= render plain: @report[:February]  %>
