@@ -2,7 +2,13 @@ require "test_helper"
 
 class ItemsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @item = items(:one)
+    @item = Item.create(title: "Some title", 
+                        summary: "Some summary", 
+                        sku: "SOME-SKU",
+                        brand: "Some brand",
+                        price: 1.23,
+                        quantity: 5,
+                        category: "Some category")
   end
 
   test "should get index" do
@@ -16,8 +22,8 @@ class ItemsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create item" do
-    assert_difference('Item.count') do
-      post items_url, params: { item: { category: @item.category, price: @item.price, quantity: @item.quantity, sku: @item.sku, summary: @item.summary, title: @item.title } }
+    assert_difference('Item.count', 1) do
+      post items_url, params: { item: { category: @item.category, price: @item.price, quantity: @item.quantity, sku: "Some other SKU", summary: @item.summary, title: @item.title } }
     end
 
     assert_redirected_to item_url(Item.last)
