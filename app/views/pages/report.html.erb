@@ -1,67 +1,104 @@
-<h1>This is the report page</h1>
+<h1>Report!</h1>
 <%= form_with do |form| %>
   <div class="field">
     <%= form.label "Select Report Year" %>
     <%= form.select :year, (Date.today.year-1)..(Date.today.year+1), :selected => Time.current.year %>
   </div>
-
+    
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit ("View"), class: "btn" %>
   </div>
 <% end %>
 
-<%= "max quantity:" %>
-<% if @max_quantity_log.present? %>
-    <%= @max_quantity_log.item_quantity %>
-<% end%>
+<table>
+    <tr>
+        <th></th>
+        <th>Most Stocked Item</th>
+        <th>Most Stocked Brand</th>
+        <th>Most Stocked Category</th>
+        <th>Highest Revenue</th>
+        <th>Least Stocked Item</th>
+        <th>Least Stocked Brand</th>
+        <th>Least Stocked Category</th>
+        <th>Lowestevenue</th>
+    </tr>
+    <% @report.each do |key, value| %>
+        <tr>
+            <th><%= key %></th>
+            <% if value[:max_quantity_log].present? %>
+                <td>
+                    SKU: <%= value[:max_quantity_log][:item_sku] %><br/> 
+                    Quantity: <%= value[:max_quantity_log][:item_quantity] %>
+                </td>
+            <% else %>
+                <td></td>
+            <% end%>
 
-<br/>
-<%= "max quantity brand:" %>
-<% if @max_quantity_by_brand_log.present? %>
-    <%= @max_quantity_by_brand_log.item_brand %>
-<% end%>
+            <% if value[:max_quantity_by_brand_log].present? %>
+                <td>
+                    Brand: <%= value[:max_quantity_by_brand_log][:item_brand] %><br/>
+                </td>
+            <% else %>
+                <td></td>
+            <% end%>
 
-<br/>
-<%= "max quantity category:" %>
-<% if @max_quantity_by_category_log.present? %>
-    <%= @max_quantity_by_category_log.item_category %>
-<% end%>
+            <% if value[:max_quantity_by_category_log].present? %>
+                <td>
+                    Category: <%= value[:max_quantity_by_category_log][:item_category] %><br/>
+                </td>
+            <% else %>
+                <td></td>
+            <% end%>
 
-<br/>
-<%= "max revenue:" %>
-<% if @max_revenue_log.present? %>
-    <%= @max_revenue_log.item_quantity%>
-    <br/>
-    <%= @max_revenue_log.item_price %>
-<% end%>
+            <% if value[:max_revenue_log].present? %>
+                <td>
+                    SKU: <%= value[:max_revenue_log][:item_sku] %><br/>
+                    Revenue: <%= value[:max_revenue_log][:item_quantity] * value[:max_revenue_log][:item_price] %>
+                </td>
+            <% else %>
+                <td></td>
+            <% end%>
 
-<br/>
+            <% if value[:min_quantity_log].present? %>
+                <td>
+                    SKU: <%= value[:min_quantity_log][:item_sku] %><br/>
+                    Quantity: <%= value[:min_quantity_log][:item_quantity] %>
+                </td>
+            <% else %>
+                <td></td>
+            <% end%>
 
-<%= "min quantity:" %>
-<% if @min_quantity_log.present? %>
-    <%= @min_quantity_log.item_quantity %>
-<% end%>
+            <% if value[:min_quantity_by_brand_log].present? %>
+                <td>
+                    Brand: <%= value[:min_quantity_by_brand_log][:item_brand] %><br/>
+                </td>
+            <% else %>
+                <td></td>
+            <% end%>
 
-<br/>
-<%= "min quantity brand:" %>
-<% if @min_quantity_by_brand_log.present? %>
-    <%= @min_quantity_by_brand_log.item_brand %>
-<% end%>
+            <% if value[:min_quantity_by_category_log].present? %>
+                <td>
+                    Category: <%= value[:min_quantity_by_category_log][:item_category] %><br/>
+                </td>
+            <% else %>
+                <td></td>
+            <% end%>
 
-<br/>
-<%= "min quantity category:" %>
-<% if @min_quantity_by_category_log.present? %>
-    <%= @min_quantity_by_category_log.item_category %>
-<% end%>
+            <% if value[:min_revenue_log].present? %>
+                <td>
+                    SKU: <%= value[:min_revenue_log][:item_sku] %><br/>
+                    Revenue: <%= value[:min_revenue_log][:item_quantity] * value[:min_revenue_log][:item_price] %>
+                </td>
+            <% else %>
+                <td></td>
+            <% end%>
+        </tr>
+    <% end %>
+ 
+</table>
 
-<br/>
-<%= "min revenue:" %>
-<% if @min_revenue_log.present? %>
-    <%= @min_revenue_log.item_quantity %>
-<% end%>
-
-<br/>
-<h1>Sample Reports</h1>
-<%= render plain: @report[:January]  %>
-
-<%= render plain: @report[:February]  %>
+<style>
+table, th, td {
+    border:1px solid black;
+}
+</style>

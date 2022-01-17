@@ -7,7 +7,6 @@ class PagesController < ApplicationController
     end
     
     def report
-        
         generate_inventory_report(params[:year].to_i)
 
     end 
