@@ -37,18 +37,22 @@
             <% end%>
 
             <%# Most Stocked Brand %>
-            <% if value[:max_quantity_by_brand_log].present? %>
+            <% if value[:max_average_quantity_by_brand].present? %>
                 <td>
-                    Brand: <%= value[:max_quantity_by_brand_log][:item_brand] %><br/>
+                    <% brand, average_quantity = value[:max_average_quantity_by_brand] %>
+                    Brand: <%= brand %><br/>
+                    Average Quantity: <%= average_quantity %>
                 </td>
             <% else %>
                 <td></td>
             <% end%>
             
             <%# Most Stocked Category %>
-            <% if value[:max_quantity_by_category_log].present? %>
+            <% if value[:max_average_quantity_by_category].present? %>
                 <td>
-                    Category: <%= value[:max_quantity_by_category_log][:item_category] %><br/>
+                    <% category, average_quantity = value[:max_average_quantity_by_category] %>
+                    Category: <%= category %><br/>
+                    Average Quantity: <%= average_quantity %>
                 </td>
             <% else %>
                 <td></td>
@@ -75,18 +79,22 @@
             <% end%>
             
             <%# Least Stocked Brand %>
-            <% if value[:min_quantity_by_brand_log].present? %>
+            <% if value[:min_average_quantity_by_brand].present? %>
                 <td>
-                    Brand: <%= value[:min_quantity_by_brand_log][:item_brand] %><br/>
+                    <% brand, average_quantity = value[:min_average_quantity_by_brand] %>
+                    Brand: <%= brand %><br/>
+                    Average Quantity: <%= average_quantity %>
                 </td>
             <% else %>
                 <td></td>
             <% end%>
 
             <%# Least Stocked Category %>
-            <% if value[:min_quantity_by_category_log].present? %>
+            <% if value[:min_average_quantity_by_category].present? %>
                 <td>
-                    Category: <%= value[:min_quantity_by_category_log][:item_category] %><br/>
+                    <% category, average_quantity = value[:min_average_quantity_by_category] %>
+                    Category: <%= category %><br/>
+                    Average Quantity: <%= average_quantity %>
                 </td>
             <% else %>
                 <td></td>
@@ -104,7 +112,7 @@
         </tr>
     <% end %>
 </table>
-
+<br/>
 <%= link_to 'Back', items_path %>
 
 <style>
