@@ -17,7 +17,52 @@
 
 
 
-<% if @log.nil? %>
-<% else %>
-    <%= @log.item_quantity %>
-<% end %>
+<%= "max quantity:" %>
+<% if @max_quantity_log.present? %>
+    <%= @max_quantity_log.item_quantity %>
+<% end%>
+
+<br/>
+<%= "max quantity brand:" %>
+<% if @max_quantity_by_brand_log.present? %>
+    <%= @max_quantity_by_brand_log.item_brand %>
+<% end%>
+
+<br/>
+<%= "max quantity category:" %>
+<% if @max_quantity_by_category_log.present? %>
+    <%= @max_quantity_by_category_log.item_category %>
+<% end%>
+
+<br/>
+<%= "max revenue:" %>
+<% if @max_revenue_log.present? %>
+    <%= @max_revenue_log.item_quantity%>
+    <br/>
+    <%= @max_revenue_log.item_price %>
+<% end%>
+
+<br/>
+
+<%= "min quantity:" %>
+<% if @min_quantity_log.present? %>
+    <%= @min_quantity_log.item_quantity %>
+<% end%>
+
+<br/>
+<%= "min quantity brand:" %>
+<% if @min_quantity_by_brand_log.present? %>
+    <%= @min_quantity_by_brand_log.item_brand %>
+<% end%>
+
+<br/>
+<%= "min quantity category:" %>
+<% if @min_quantity_by_category_log.present? %>
+    <%= @min_quantity_by_category_log.item_category %>
+<% end%>
+
+<br/>
+<%= "min revenue:" %>
+<% if @min_revenue_log.present? %>
+    <%= @min_revenue_log.item_quantity %>
+<% end%>
