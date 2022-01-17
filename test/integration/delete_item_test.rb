@@ -8,7 +8,7 @@ class DeleteItemTest < ActionDispatch::IntegrationTest
                             brand: 'Some brand',
                             price: 1.23,
                             quantity: 5,
-                            category: 'Some category' )
+                            category: 'Some category' )                        
     end
     
     test "delete an item should succeed if exists" do
