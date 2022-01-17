@@ -1,19 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  item_title: MyString
-  item_sku: MyString
-  item_price: 1.5
-  item_quantity: 1
-  item_brand: MyString
-  string: MyString
-  item_category: MyString
+    item_title: MyString
+    item_sku: MyString
+    item_price: 1.5
+    item_quantity: 1
+    item_brand: MyString
+    item_category: MyString
 
 two:
-  item_title: MyString
-  item_sku: MyString
-  item_price: 1.5
-  item_quantity: 1
-  item_brand: MyString
-  string: MyString
-  item_category: MyString
+    item_title: MyString
+    item_sku: MyString
+    item_price: 1.5
+    item_quantity: 1
+    item_brand: MyString
+    item_category: MyString

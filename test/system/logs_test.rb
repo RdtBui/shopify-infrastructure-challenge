@@ -20,7 +20,6 @@ class LogsTest < ApplicationSystemTestCase
     fill_in "Item quantity", with: @log.item_quantity
     fill_in "Item sku", with: @log.item_sku
     fill_in "Item title", with: @log.item_title
-    fill_in "String", with: @log.string
     click_on "Create Log"
 
     assert_text "Log was successfully created"
@@ -37,7 +36,6 @@ class LogsTest < ApplicationSystemTestCase
     fill_in "Item quantity", with: @log.item_quantity
     fill_in "Item sku", with: @log.item_sku
     fill_in "Item title", with: @log.item_title
-    fill_in "String", with: @log.string
     click_on "Update Log"
 
     assert_text "Log was successfully updated"

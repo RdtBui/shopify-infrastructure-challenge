@@ -17,7 +17,7 @@ class LogsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create log" do
     assert_difference('Log.count') do
-      post logs_url, params: { log: { item_brand: @log.item_brand, item_category: @log.item_category, item_price: @log.item_price, item_quantity: @log.item_quantity, item_sku: @log.item_sku, item_title: @log.item_title, string: @log.string } }
+      post logs_url, params: { log: { item_brand: @log.item_brand, item_category: @log.item_category, item_price: @log.item_price, item_quantity: @log.item_quantity, item_sku: @log.item_sku, item_title: @log.item_title} }
     end
 
     assert_redirected_to log_url(Log.last)
@@ -34,7 +34,7 @@ class LogsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update log" do
-    patch log_url(@log), params: { log: { item_brand: @log.item_brand, item_category: @log.item_category, item_price: @log.item_price, item_quantity: @log.item_quantity, item_sku: @log.item_sku, item_title: @log.item_title, string: @log.string } }
+    patch log_url(@log), params: { log: { item_brand: @log.item_brand, item_category: @log.item_category, item_price: @log.item_price, item_quantity: @log.item_quantity, item_sku: @log.item_sku, item_title: @log.item_title} }
     assert_redirected_to log_url(@log)
   end
 
