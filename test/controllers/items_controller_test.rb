@@ -2,13 +2,7 @@ require "test_helper"
 
 class ItemsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @item = Item.create(title: "Some title", 
-                        summary: "Some summary", 
-                        sku: "SOME-SKU",
-                        brand: "Some brand",
-                        price: 1.23,
-                        quantity: 5,
-                        category: "Some category")
+    @item = items(:one)
   end
 
   test "should get index" do

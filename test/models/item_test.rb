@@ -2,13 +2,7 @@ require "test_helper"
 
 class ItemTest < ActiveSupport::TestCase
   def setup 
-    @item = Item.new(title: "Some title", 
-                     summary: "Some summary", 
-                     sku: "SOME-SKU",
-                     brand: "Some brand",
-                     price: 1.23,
-                     quantity: 5,
-                     category: "Some category")
+    @item = items(:one)
   end
 
   # ========================================
