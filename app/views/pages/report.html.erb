@@ -2,7 +2,7 @@
 <%= form_with do |form| %>
   <div class="field">
     <%= form.label "Select Report Year" %>
-    <%= form.select :year, (Date.today.year-1)..(Date.today.year+1), :selected => Time.current.year %>
+    <%= form.select :year, (Date.today.year-3)..(Date.today.year), :selected => Time.current.year %>
   </div>
     
   <div class="actions">
@@ -20,11 +20,13 @@
         <th>Least Stocked Item</th>
         <th>Least Stocked Brand</th>
         <th>Least Stocked Category</th>
-        <th>Lowestevenue</th>
+        <th>Lowest Revenue</th>
     </tr>
     <% @report.each do |key, value| %>
         <tr>
             <th><%= key %></th>
+
+            <%# Most Stocked Item %>
             <% if value[:max_quantity_log].present? %>
                 <td>
                     SKU: <%= value[:max_quantity_log][:item_sku] %><br/> 
@@ -34,6 +36,7 @@
                 <td></td>
             <% end%>
 
+            <%# Most Stocked Brand %>
             <% if value[:max_quantity_by_brand_log].present? %>
                 <td>
                     Brand: <%= value[:max_quantity_by_brand_log][:item_brand] %><br/>
@@ -41,7 +44,8 @@
             <% else %>
                 <td></td>
             <% end%>
-
+            
+            <%# Most Stocked Category %>
             <% if value[:max_quantity_by_category_log].present? %>
                 <td>
                     Category: <%= value[:max_quantity_by_category_log][:item_category] %><br/>
@@ -50,6 +54,7 @@
                 <td></td>
             <% end%>
 
+            <%# Highest Revenue %>
             <% if value[:max_revenue_log].present? %>
                 <td>
                     SKU: <%= value[:max_revenue_log][:item_sku] %><br/>
@@ -58,7 +63,8 @@
             <% else %>
                 <td></td>
             <% end%>
-
+            
+            <%# Least Stocked Item %>
             <% if value[:min_quantity_log].present? %>
                 <td>
                     SKU: <%= value[:min_quantity_log][:item_sku] %><br/>
@@ -67,7 +73,8 @@
             <% else %>
                 <td></td>
             <% end%>
-
+            
+            <%# Least Stocked Brand %>
             <% if value[:min_quantity_by_brand_log].present? %>
                 <td>
                     Brand: <%= value[:min_quantity_by_brand_log][:item_brand] %><br/>
@@ -76,6 +83,7 @@
                 <td></td>
             <% end%>
 
+            <%# Least Stocked Category %>
             <% if value[:min_quantity_by_category_log].present? %>
                 <td>
                     Category: <%= value[:min_quantity_by_category_log][:item_category] %><br/>
@@ -84,6 +92,7 @@
                 <td></td>
             <% end%>
 
+            <%# Lowest Revenue %>
             <% if value[:min_revenue_log].present? %>
                 <td>
                     SKU: <%= value[:min_revenue_log][:item_sku] %><br/>
@@ -94,7 +103,6 @@
             <% end%>
         </tr>
     <% end %>
- 
 </table>
 
 <style>
