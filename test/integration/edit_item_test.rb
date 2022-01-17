@@ -15,11 +15,20 @@ class EditItemTest < ActionDispatch::IntegrationTest
         get "/items/#{@item.id}/edit"
         assert_response :success
         assert_no_difference 'Item.count' do
-            patch item_url(@item), params: { item: { title: "Updated title" }}
+            patch item_url(@item), params: { item: { quantity: 200 }}
             assert_response :redirect
         end
         follow_redirect!
         assert_response :success
-        assert_match "Updated title", response.body
+        assert_match "<strong>Quantity:</strong>\n  200\n</p>\n\n<p>\n  <strong>", response.body
+    end
+
+    test "update quantity to negative should display error" do
+        get "/items/#{@item.id}/edit"
+        assert_response :success
+        assert_no_difference 'Item.count' do
+            patch item_url(@item), params: { item: { quantity: -1 }}
+            assert_match "error", response.body
+        end
     end
 end
