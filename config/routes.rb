@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :logs
   root 'items#index'
-  get 'report', to: 'pages#report'
-  post 'report', to: 'pages#report'
+  get 'reports', to: 'reports#index'
+  post 'reports', to: 'reports#index'
   
   resources :items
+  resources :logs
 end

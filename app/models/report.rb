@@ -1,26 +1,18 @@
 require 'date'
 
-class PagesController < ApplicationController
-
-    def home
-
-    end
-    
-    def report
-        generate_inventory_report(params[:year].to_i)
-
-    end 
-
-    private
+class Report < ApplicationRecord
     def generate_inventory_report(year)
         months = [:January, :February, :March, :April, :May, :June, :July, :August, :September, :October, :November, :December]
-        @report = {}
+        report = {}
 
         months.each_with_index do |month,i|
-            @report[month] = generate_monthly_report(year, i + 1)
+            report[month] = generate_monthly_report(year, i + 1)
         end
+
+        return report
     end
-    
+
+    private
     def generate_monthly_report(year, month)
         max_quantity_log = max_quantity(year, month) # Most stocked item
         max_quantity_by_brand_log = max_quantity_by_brand(year, month) # Most stocked brand        
