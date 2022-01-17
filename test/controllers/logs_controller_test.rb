@@ -42,7 +42,7 @@ class LogsControllerTest < ActionDispatch::IntegrationTest
     assert_difference('Log.count', -1) do
       delete log_url(@log)
     end
-
+    
     assert_redirected_to logs_url
   end
 end
