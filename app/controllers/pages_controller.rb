@@ -7,11 +7,13 @@ class PagesController < ApplicationController
     end
     
     def report
-        generate_inventory_report(year)
+        
+        generate_inventory_report(params[:year].to_i)
+
     end 
 
     private
-    def generate_inventory_report()
+    def generate_inventory_report(year)
         months = [:January, :February, :March, :April, :May, :June, :July, :August, :September, :October, :November, :December]
         @report = {}
 
