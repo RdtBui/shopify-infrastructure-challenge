@@ -1,32 +1,32 @@
 require 'date'
 
 class Report < ApplicationRecord
-    def generate_inventory_report(year)
+    def generate_year_report(year)
         months = [:January, :February, :March, :April, :May, :June, :July, :August, :September, :October, :November, :December]
         report = {}
 
         months.each_with_index do |month,i|
-            report[month] = generate_monthly_report(year, i + 1)
+            report[month] = generate_month_report(year, i + 1)
         end
 
         return report
     end
 
-    private
-    def generate_monthly_report(year, month)
+    def generate_month_report(year, month)
         report = { max_quantity_log: max_quantity(year, month),
-                   max_revenue_log: max_revenue(year, month),
-                   max_average_quantity_by_brand: max_average_quantity_by_brand(year, month),
-                   max_average_quantity_by_category: max_average_quantity_by_category(year, month),
-                   min_quantity_log: min_quantity(year, month),
-                   min_revenue_log: min_revenue(year, month),
-                   min_average_quantity_by_brand: min_average_quantity_by_brand(year, month),
-                   min_average_quantity_by_category: min_average_quantity_by_category(year, month)
+            max_revenue_log: max_revenue(year, month),
+            max_average_quantity_by_brand: max_average_quantity_by_brand(year, month),
+            max_average_quantity_by_category: max_average_quantity_by_category(year, month),
+            min_quantity_log: min_quantity(year, month),
+            min_revenue_log: min_revenue(year, month),
+            min_average_quantity_by_brand: min_average_quantity_by_brand(year, month),
+            min_average_quantity_by_category: min_average_quantity_by_category(year, month)
         }
-
+        
         return report
     end
-
+    
+    private
     def max_quantity(year, month)
         log = get_month_log(year, month)
         max_item = min_max_quantity(log, true)
@@ -44,7 +44,6 @@ class Report < ApplicationRecord
         max = min_max_average_quantity_by_criteria(:item_brand, log, true)
         return max
     end
-    
     
     def max_average_quantity_by_category(year, month)
         log = get_month_log(year, month)
@@ -81,7 +80,7 @@ class Report < ApplicationRecord
         end_date = DateTime.civil(year, month, -1, -1, -1) # Last day of the month, at 11:59 pm
         log = Log.where("created_at >= :start_date AND created_at <= :end_date", 
             { start_date: start_date, end_date: end_date })
-
+            
         return log
     end
 
@@ -100,7 +99,7 @@ class Report < ApplicationRecord
     def min_max_revenue(log, max=false) # true => returns max, false => returns min
         total_values = log.group("id").sum("item_quantity * item_price")
         if max
-            log_id, revenue = total_values.max_by(&:first)
+            log_id, revenue = total_values.max_by(&:last)
         else
             log_id, revenue = total_values.min_by(&:last)
         end
