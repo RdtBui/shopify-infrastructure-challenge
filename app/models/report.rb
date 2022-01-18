@@ -4,11 +4,9 @@ class Report < ApplicationRecord
     def generate_year_report(year)
         months = [:January, :February, :March, :April, :May, :June, :July, :August, :September, :October, :November, :December]
         report = {}
-
         months.each_with_index do |month,i|
             report[month] = generate_month_report(year, i + 1)
         end
-
         return report
     end
 
@@ -22,7 +20,6 @@ class Report < ApplicationRecord
             min_average_quantity_by_brand: min_average_quantity_by_brand(year, month),
             min_average_quantity_by_category: min_average_quantity_by_category(year, month)
         }
-        
         return report
     end
     
@@ -80,35 +77,32 @@ class Report < ApplicationRecord
         end_date = DateTime.civil(year, month, -1, -1, -1) # Last day of the month, at 11:59 pm
         log = Log.where("created_at >= :start_date AND created_at <= :end_date", 
             { start_date: start_date, end_date: end_date })
-            
         return log
     end
 
     def min_max_quantity(log, max=false) # true => returns max, false => returns min
         if log.nil?
             return nil
-        end
-
-        if max
+        elsif max
             return log.order(item_quantity: :desc).first
+        else # min
+            return log.order(item_quantity: :asc).first
         end
-
-        return log.order(item_quantity: :asc).first
     end
 
     def min_max_revenue(log, max=false) # true => returns max, false => returns min
         total_values = log.group("id").sum("item_quantity * item_price")
         if max
             log_id, revenue = total_values.max_by(&:last)
-        else
+        else # min
             log_id, revenue = total_values.min_by(&:last)
         end
         
         if log_id.nil?
             return nil
-        end
-        
-        return Log.find(log_id)
+        else
+            return Log.find(log_id)
+        end   
     end
     
     def min_max_average_quantity_by_criteria(criteria, log, max = false) # true => returns max, false => returns min
@@ -126,10 +120,10 @@ class Report < ApplicationRecord
         
         total_average_quantity_per_criteria.delete(nil)
         
-        if max
+        if max 
             return total_average_quantity_per_criteria.max_by(&:first)
+        else # min
+            return total_average_quantity_per_criteria.min_by(&:last)
         end
-        
-        return total_average_quantity_per_criteria.min_by(&:last)
     end
 end
