@@ -10,4 +10,3 @@ yarn.lock linguist-generated
 vendor/* linguist-vendored
 
 * text=auto eol=lf
-*.{png, jpg, jpeg, gif, webp, woff, woff2} binary
