@@ -10,7 +10,7 @@
               |_|       |___|                            |___|  
 </p>
 </pre>                                                                                                                                                                           
-
+[Quick Demo](http://34.72.158.92:3000/) hosted with Google Cloud Platform
 ## Table of Contents
 
 - [About the Project](#about-the-project)
@@ -28,7 +28,7 @@
 - [Thoughts and Improvements](#thoughts-and-improvements)
 
 ## About the Project
-Hello! I wanted a challenge so I learned Ruby on Rails by myself in a short amount of time for this project. Don't worry, the code is of high quality. I made sure that the code is clean by keeping scalability, reusability, and best practices in mind. For the sake of simplicity, the project comes with 79 sample log seeds to populate the database. On top of that, 66 tests were written to keep a good quality control. The report feature was implemented with TDD. I even went further and Dockerized the project because Ruby on Rails is a pain to install so you don't have to go through the struggles I did.
+Hello! I wanted a challenge so I learned Ruby on Rails by myself in a short amount of time for this project. Don't worry, the code is of high quality. I made sure that the code is clean by keeping scalability, reusability, and best practices in mind. For the sake of simplicity, the project comes with 79 sample log seeds to populate the database. On top of that, 66 tests were written to keep a good quality control. The report feature was implemented with TDD. I even went further and Dockerized the project because Ruby on Rails is a pain to install so you don't have to go through the struggles I did. In case you are not able to do any installation, I hosted the project on Google Cloud Platform for you to have a try in the Quick Demo link above.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -36,6 +36,7 @@ Hello! I wanted a challenge so I learned Ruby on Rails by myself in a short amou
 
 * [Ruby on Rails](https://rubyonrails.org/) as the backend framework
 * [SQLite](https://www.sqlite.org/index.html) as the database
+* [Google Cloud Platform](https://cloud.google.com/) for hosting the website with a VM Instance
 * [Docker](https://www.docker.com/) as the containerization platform
 * [RuboCop](https://rubocop.org/) as the linting tool
 * Baggy eyes and hunched back
