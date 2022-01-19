@@ -10,3 +10,5 @@ yarn.lock linguist-generated
 vendor/* linguist-vendored
 
 * text=auto eol=lf
+*.jpg binary
+*.data binary
