@@ -188,13 +188,12 @@ The report is based off of the logs generated whenever an item is created or edi
 
 ## Thoughts and Improvements
 
-There were a good deal of problems that came up during the building of the project such as the CRLF break type that Windows uses. The project was built on a Linux machine which uses LF but when it was tested on a Windows machine, the OS couldn't recognize the symbol and Docker would fail to host the server. A solution was to comment out the lines generating those errors but that's not a good way to solve it. A better solution, which was implemented, was to add a line in the .gitattributes file that would normalize line endings in the repository when cloned. I rather fix an issue than to avoid it. Overall, there were challenges on top of challenges but they were all solved in a eloquent way. It was a good and fun learning experience for me.
+There were a good deal of problems that came up during the building of the project such as the CRLF break type that Windows uses. The project was built on a Linux machine which uses LF but when it was tested on a Windows machine, the OS couldn't recognize the symbol and Docker would fail to host the server. My implemented solution was to add a line in the .gitattributes file that would normalize line endings in the repository when cloned. Overall, there were challenges on top of challenges but they were all solved in a eloquent way. It was a good and fun learning experience for me.
 
 Some ideas I could do for next time:
 - For a better report, an automatic daily log of the inventory should be performed.
 - Allow an item to have multiple categories with a many-to-many association with a table containing the relationship between item_id to category_id.
 - Add a limit of character to SKU. Right now it doesn't have a limit because [Shopify](https://www.shopify.ca/encyclopedia/stock-keeping-unit-sku) mentioned that the SKU can be anything that company wishes it to be as long as it's unique within the company. In theory, the SKU can be a huge string. With that, another improvement would be to make the SKU unique within the company. Right now it's only unique across all companies like an UPC.
-- Re-evaluate the report metrics to see if there are better approaches.
 - Snapshot the report to keep a history of events.
 - If this was an actual product, it would be best to get in touch with the merchandiser to build better metrics according to their needs.
 
