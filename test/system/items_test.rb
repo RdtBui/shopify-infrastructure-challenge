@@ -12,7 +12,7 @@ class ItemsTest < ApplicationSystemTestCase
 
   test "creating a Item" do
     visit items_url
-    click_on "New Item"
+    click_on "Add Item"
 
     fill_in "Category", with: @item.category
     fill_in "Price", with: @item.price

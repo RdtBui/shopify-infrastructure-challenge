@@ -1,7 +1,7 @@
 require "test_helper"
 
 class CreateItemTest < ActionDispatch::IntegrationTest
-    test "get new item form and create item" do
+    test "get add item form and create item" do
         get "/items/new"
         assert_response :success
         assert_difference 'Item.count', 1 do
@@ -19,7 +19,7 @@ class CreateItemTest < ActionDispatch::IntegrationTest
         assert_match "SOME-SKU", response.body
     end
 
-    test "get new item form and reject invalid item submission" do
+    test "get add item form and reject invalid item submission" do
         get "/items/new"
         assert_response :success
         assert_no_difference 'Item.count' do

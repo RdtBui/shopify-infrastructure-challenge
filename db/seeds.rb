@@ -12,7 +12,8 @@ Item.create([
         price: 99.99,
         quantity: 4,
         brand: "Sample brand",
-        category: "Sample category"
+        category: "Sample category",
+        created_at: DateTime.new(2022,1,18)
     }
 ])
 
@@ -749,24 +750,6 @@ Log.create([
 # ========================================
 Log.create([
     # January
-    {
-        item_title: "Sample item title from seed.rb",
-        item_sku: "SOME-SKU",
-        item_price: 99.99,
-        item_quantity: 35,
-        item_brand: "Sample brand",
-        item_category: "Sample category",
-        created_at: DateTime.new(2022,1,4)
-    },
-    {
-        item_title: "Sample item title from seed.rb",
-        item_sku: "SOME-SKU",
-        item_price: 99.99,
-        item_quantity: 14,
-        item_brand: "Sample brand",
-        item_category: "Sample category",
-        created_at: DateTime.new(2022,1,8)
-    },
     {
         item_title: "Sample item title from seed.rb",
         item_sku: "SOME-SKU",
