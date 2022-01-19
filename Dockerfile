@@ -18,7 +18,7 @@ RUN bundle install
 RUN rails webpacker:install
 
 RUN rails db:migrate
-run rails db:seed
+RUN rails db:seed
 RUN rails test
 
 CMD rails s -b 0.0.0.0 
