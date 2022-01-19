@@ -28,12 +28,12 @@
 - [Thoughts and Improvements](#thoughts-and-improvements)
 
 ## About the Project
-Hello! I wanted a challenge so I learned Ruby on Rails by myself in a short amount of time for this project. Don't worry, the code is of high quality. I made sure that the code is clean by keeping scalability, reusability, and best practices in mind. For the sake of simplicity, the project comes with 79 sample log seeds to populate the database. On top of that, 66 tests were written to keep a good quality control. I even went further and Dockerized the project because Ruby on Rails is a pain to install so you don't have to go through the struggles I did.
+Hello! I wanted a challenge so I learned Ruby on Rails by myself in a short amount of time for this project. Don't worry, the code is of high quality. I made sure that the code is clean by keeping scalability, reusability, and best practices in mind. For the sake of simplicity, the project comes with 79 sample log seeds to populate the database. On top of that, 66 tests were written to keep a good quality control. The report feature was implemented with TDD. I even went further and Dockerized the project because Ruby on Rails is a pain to install so you don't have to go through the struggles I did.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
-The main tools used to build the project are
+
 * [Ruby on Rails](https://rubyonrails.org/) as the backend framework
 * [SQLite](https://www.sqlite.org/index.html) as the database
 * [Docker](https://www.docker.com/) as the containerization platform
@@ -101,7 +101,7 @@ Note: A lot of unit tests were written to make sure that the validations are eff
 
 ### Running the Tests
 
-The Dockerfile runs the tests when you build it. Please follow these steps if you want to see the tests again:
+The Dockerfile runs the tests when you build it. Please follow these steps if you want to run it manually:
 1. Run the container if you haven't already, assuming you already built the Docker image from [Installation](#installation)
    ```
    docker run -d -p 3000:3000 hire-richard-bui
@@ -126,10 +126,11 @@ Example:
    docker run -d -p 3000:3000 hire-richard-bui
    ```
 2. Access the container's CLI within Docker Desktop
-   ```
-   docker ps
-   ```
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/43472079/150192444-d1b72459-6d2f-47f8-9b7f-360dcc0f500d.png" />
+</p>
 3. Run the command line
+ 
    ```
    rails test
    ```
@@ -161,7 +162,7 @@ The report table is able to display various metrics, including most in-stock and
 I believe that this feature would give you a glimpse of my analytical skills.
 
 ### Mechanic
-The report is based off of the logs generated whenever an item is created or edited. In normal time, they would be timestamped with the date of execution but a few logs for the year 2021 has been seeded for demonstration purposes.  These logs would then be extracted in the report model and compiled into different metrics. Improvement of the feature can be easily made which is described in the [Thoughts and Improvements](#thoughts-and-improvements) section.
+The report is based off of the logs generated whenever an item is created or edited. In normal time, they would be timestamped with the date of execution but a few logs for the year 2021 has been seeded for demonstration purposes.  These logs would then be extracted in the report model and compiled into different metrics. Am improvement of the feature can be easily made which is described in the [Thoughts and Improvements](#thoughts-and-improvements) section.
 
 ### Metrics
 - Most Stocked Item
@@ -181,14 +182,21 @@ The report is based off of the logs generated whenever an item is created or edi
 - Least Stocked Category*
   - Opposite of Most Stocked Category
   
-*If the item was logged more than once (e.g.: quantity was edited multiple times) within the month, then the average of those quantities for the same item will be calculated.
+*If an item was logged more than once within the month (e.g.: quantity was edited multiple times), then the average of the quantities will be calculated for the same item.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Thoughts and Improvements
 
-Some improvements I could do for the next time:
-- feature, log every day
+There were a good deal of problems that came up during the building of the project such as the CRLF break type that Windows uses. The project was built on a Linux machine which uses LF but when it was tested on a Windows machine, the OS couldn't recognize the symbol and Docker would fail to host the server. A solution was to comment out the lines generating those errors but that's not a good way to solve it. A better solution, which was implemented, was to add a line in the .gitattributes file that would normalize line endings in the repository when cloned. I rather fix an issue than to avoid it. Overall, there were challenges on top of challenges but they were all solved in a eloquent way. It was a good and fun learning experience for me.
+
+Some ideas I could do for next time:
+- For a better report, an automatic daily log of the inventory should be performed.
+- Allow an item to have multiple categories with a many-to-many association with a table containing the relationship between item_id to category_id.
+- Add a limit of character to SKU. Right now it doesn't have a limit because [Shopify](https://www.shopify.ca/encyclopedia/stock-keeping-unit-sku) mentioned that the SKU can be anything that company wishes it to be as long as it's unique within the company. In theory, the SKU can be a huge string. With that, another improvement would be to make the SKU unique within the company. Right now it's only unique across all companies like an UPC.
+- Re-evaluate the report metrics to see if there are better approaches.
+- Snapshot the report to keep a history of events.
+- If this was an actual product, it would be best to get in touch with the merchandiser to build better metrics according to their needs.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
