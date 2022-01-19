@@ -10,34 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_17_144827) do
-
-  create_table "items", force: :cascade do |t|
-    t.string "title"
-    t.text "summary"
-    t.string "sku"
-    t.float "price"
-    t.integer "quantity"
-    t.string "category"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "brand"
+ActiveRecord::Schema.define(version: 20_220_117_144_827) do
+  create_table 'items', force: :cascade do |t|
+    t.string 'title'
+    t.text 'summary'
+    t.string 'sku'
+    t.float 'price'
+    t.integer 'quantity'
+    t.string 'category'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
+    t.string 'brand'
   end
 
-  create_table "logs", force: :cascade do |t|
-    t.string "item_title"
-    t.string "item_sku"
-    t.float "item_price"
-    t.integer "item_quantity"
-    t.string "item_brand"
-    t.string "item_category"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'logs', force: :cascade do |t|
+    t.string 'item_title'
+    t.string 'item_sku'
+    t.float 'item_price'
+    t.integer 'item_quantity'
+    t.string 'item_brand'
+    t.string 'item_category'
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
 
-  create_table "reports", force: :cascade do |t|
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
+  create_table 'reports', force: :cascade do |t|
+    t.datetime 'created_at', precision: 6, null: false
+    t.datetime 'updated_at', precision: 6, null: false
   end
-
 end
