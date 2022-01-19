@@ -1,12 +1,14 @@
-<h1>Report!</h1>
+<h1>Inventory report for <%= @year %></h1>
+<p>Given that you view this project in 2022, any creation/update of an <strong>item</strong> object will create a <strong>log</strong> object for the given month and calculations will be performed for that year.</p>
+<p>The report results are not hardcoded. Please visit the report model for details of the calculations.</p>
+<p>2021 has <strong>log</strong> seeds already predefined from db > seeds.rb and the calculations for the report are automatically done in the report model.</p>
+<p><strong>Please visit the README of the project for details of how each metric is calculated.</strong></p>
+
+<br/>
 <%= form_with do |form| %>
   <div class="field">
-    <%= form.label "Select Report Year" %>
-    <%= form.select :year, (Date.today.year-1)..(Date.today.year), :selected => Time.current.year %>
-  </div>
-    
-  <div class="actions">
-    <%= form.submit ("View"), class: "btn" %>
+    <%= form.label "Select year" %>
+    <%= form.select :year, 2021..(Date.today.year), {:selected => @year}, :onchange => "this.form.submit()" %>
   </div>
 <% end %>
 
@@ -14,13 +16,13 @@
     <tr>
         <th></th>
         <th>Most Stocked Item</th>
+        <th>Highest Revenue</th>
         <th>Most Stocked Brand</th>
         <th>Most Stocked Category</th>
-        <th>Highest Revenue</th>
         <th>Least Stocked Item</th>
+        <th>Lowest Revenue</th>
         <th>Least Stocked Brand</th>
         <th>Least Stocked Category</th>
-        <th>Lowest Revenue</th>
     </tr>
     <% @report.each do |key, value| %>
         <tr>
@@ -31,6 +33,16 @@
                 <td>
                     SKU: <%= value[:max_quantity_log][:item_sku] %><br/> 
                     Quantity: <%= value[:max_quantity_log][:item_quantity] %>
+                </td>
+            <% else %>
+                <td></td>
+            <% end%>
+
+            <%# Highest Revenue %>
+            <% if value[:max_revenue_log].present? %>
+                <td>
+                    SKU: <%= value[:max_revenue_log][:item_sku] %><br/>
+                    Revenue: <%= value[:max_revenue_log][:item_quantity] * value[:max_revenue_log][:item_price] %>
                 </td>
             <% else %>
                 <td></td>
@@ -57,22 +69,22 @@
             <% else %>
                 <td></td>
             <% end%>
-
-            <%# Highest Revenue %>
-            <% if value[:max_revenue_log].present? %>
-                <td>
-                    SKU: <%= value[:max_revenue_log][:item_sku] %><br/>
-                    Revenue: <%= value[:max_revenue_log][:item_quantity] * value[:max_revenue_log][:item_price] %>
-                </td>
-            <% else %>
-                <td></td>
-            <% end%>
             
             <%# Least Stocked Item %>
             <% if value[:min_quantity_log].present? %>
                 <td>
                     SKU: <%= value[:min_quantity_log][:item_sku] %><br/>
                     Quantity: <%= value[:min_quantity_log][:item_quantity] %>
+                </td>
+            <% else %>
+                <td></td>
+            <% end%>
+
+            <%# Lowest Revenue %>
+            <% if value[:min_revenue_log].present? %>
+                <td>
+                    SKU: <%= value[:min_revenue_log][:item_sku] %><br/>
+                    Revenue: <%= value[:min_revenue_log][:item_quantity] * value[:min_revenue_log][:item_price] %>
                 </td>
             <% else %>
                 <td></td>
@@ -99,16 +111,6 @@
             <% else %>
                 <td></td>
             <% end%>
-
-            <%# Lowest Revenue %>
-            <% if value[:min_revenue_log].present? %>
-                <td>
-                    SKU: <%= value[:min_revenue_log][:item_sku] %><br/>
-                    Revenue: <%= value[:min_revenue_log][:item_quantity] * value[:min_revenue_log][:item_price] %>
-                </td>
-            <% else %>
-                <td></td>
-            <% end%>
         </tr>
     <% end %>
 </table>
@@ -118,5 +120,6 @@
 <style>
 table, th, td {
     border:1px solid black;
+    border-collapse: collapse;
 }
 </style>
