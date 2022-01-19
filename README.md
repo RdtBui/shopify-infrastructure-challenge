@@ -1,6 +1,15 @@
 <div id="top"></div>
 
-## Shopify Infrastructure / Site Reliability Engineering Intern Challenge - Summer 2022
+## Shopify Infrastructure / Site Reliability Challenge - Summer 2022
+<pre>
+<p align="center">                                                    
+ _____ _           _ ___        _____ _       _ _                 
+|   __| |_ ___ ___|_|  _|_ _   |     | |_ ___| | |___ ___ ___ ___ 
+|__   |   | . | . | |  _| | |  |   --|   | .'| | | -_|   | . | -_|
+|_____|_|_|___|  _|_|_| |_  |  |_____|_|_|__,|_|_|___|_|_|_  |___|
+              |_|       |___|                            |___|  
+</p>
+</pre>                                                                                                                                                                           
 
 ## Table of Contents
 
@@ -13,10 +22,14 @@
   - [Running the Tests](#running-the-tests)
 - [Usage](#usage)
 - [Feature](#feature)
+  - [Reason](#reason)
+  - [Mechanic](#mechanic)
+  - [Metrics](#metrics)
 - [Thoughts and Improvements](#thoughts-and-improvements)
 
 ## About the Project
-LINTING  seed wanted to challenge myself with ruby on rails
+Hello! I wanted a challenge so I learned Ruby on Rails by myself in a short amount of time for this project. Don't worry, the code is of high quality. I made sure that the code is clean by keeping scalability, reusability, and best practices in mind. For the sake of simplicity, the project comes with 79 sample log seeds to populate the database. On top of that, 66 tests were written to keep a good quality control. I even went further and Dockerized the project because Ruby on Rails is a pain to install so you don't have to go through the struggles I did.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
@@ -33,68 +46,38 @@ The main tools used to build the project are
 
 ### Prerequisites
 
-Ruby on Rails is known to be difficult to install so the project was Dockerized for ease of installation. The only thing you need to install before starting is [Docker](https://docs.docker.com/get-docker/). You will also need [git](https://git-scm.com/downloads) to clone the project.
+Ruby on Rails is known to be difficult to install so the project was Dockerized for ease of installation. The only thing you need to install before starting is Docker. You will also need Git to clone the project.
+
+* [Docker](https://docs.docker.com/get-docker/)
+* [Git](https://git-scm.com/downloads)
 
 ### Installation
-With Docker installed, follow these commands to run the server. Note: UNIX based operating systems might need to prefix `sudo` in front of commands if asked for permissions. Make sure your Docker Daemon is running if you're using Docker Desktop.
+Make sure your Docker Daemon is running if you're using Docker Desktop.
 
-<details><summary>macOS and Linux</summary>
+Note: UNIX based operating systems might need to prefix `sudo` in front of commands if asked for permissions. Building the Docker image might take several minutes if it's your first time.
   
 1. Clone the repo
    ```
    git clone https://github.com/RdtBui/shopify-infrastructure-challenge/
    ```
-2. Build the Docker image and DON'T FORGET the dot at the end
+2. Navigate to the root directory and build the Docker image and DON'T FORGET the dot at the end
    ```
    docker build -t hire-richard-bui .
    ```
-3. Create and start the container from the Docker image in a detached mode
+3. Create and start the container from the Docker image
    ```
-   docker run -d -p 3000:3000 hire-richard-bui
+   docker run -p 3000:3000 hire-richard-bui
    ```
-4. Enter `0.0.0.0:3000` in the address bar of your browser
-</details>
+4. Enter `localhost:3000` in the address bar of your browser
 
-<details><summary>Windows</summary>
-  
-If this is your operating system, sorry. You will need to do some extra steps.
+<p align="right">(<a href="#top">back to top</a>)</p>
 
-1. Clone the repo
-   ```
-   git clone https://github.com/RdtBui/shopify-infrastructure-challenge/
-   ```
-2. Comment out line 20, 21, and 22 from the Dockerfile as shown
-<p align="center">
-  <img src="https://user-images.githubusercontent.com/43472079/150080063-afea3c92-d359-4d56-8e4f-79cbaaad005e.png" />
-</p>
-
-3. Create and start the container from the Docker image in a detached mode
-   ```
-   docker run -d -p 3000:3000 hire-richard-bui
-   ```
-4. Find the name of your container
-   ```
-   docker ps
-   ```
-5. Run the DB migrations on the container by replacing <your_container_name> with the name of the `hire-richard-bui` container. 
-   ```
-   docker exec <your_container_name> rails db:migrate RAILS_ENV=test
-   ```
-   ***See picture in [Running the Tests](#running-the-tests) for a better understanding***
-   
-6. Do the same with the following command to populate the database with the seeds
-   ```
-   docker exec <your_container_name> rails db:seed
-   ```
-7. Enter `0.0.0.0:3000` in the address bar of your browser
-</details>
-  
 ## Tests
 There are a total of **66 tests** and **113 different assertions** in the project.
 <p align="center">
   <img src="https://user-images.githubusercontent.com/43472079/150077671-b6903584-1d25-4689-8aea-9f7c66e7cf52.png" />
 </p>
-Many types of tests were written during the project because I believe that tests are essential for keeping a project robust. These includes: 
+Three types of tests were written during the project. These include: 
 
 1. Unit tests (test > models)
     - item_test.rb
@@ -107,11 +90,19 @@ Many types of tests were written during the project because I believe that tests
     - create_item_test.rb
     - delete_item_test.rb
     - edit_item_test.rb
+    
+Note: A lot of unit tests were written to make sure that the validations are effective in preventing errors.
+
+<details><summary>Show Sample Validations</summary>  
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/43472079/150180802-5533b327-992b-43ee-8202-2676b0c37950.png" />
+</p>
+</details>
 
 ### Running the Tests
-  
+
 The Dockerfile runs the tests when you build it. Please follow these steps if you want to see the tests again:
-1. Run start the container in detached mode if you haven't already, assuming you already built the Docker image
+1. Run the container if you haven't already, assuming you already built the Docker image from [Installation](#installation)
    ```
    docker run -d -p 3000:3000 hire-richard-bui
    ```
@@ -123,11 +114,27 @@ The Dockerfile runs the tests when you build it. Please follow these steps if yo
    ```
    docker exec <your_container_name> rails test
    ```
-Example to run the tests:
+Example:
 <p align="center">
   <img src="https://user-images.githubusercontent.com/43472079/150074389-efb3ea0d-11a1-4d17-821d-89a29839e8bd.png" />
 </p>
 
+<details><summary>Alternative Way: Docker Desktop</summary>  
+  
+1. Run the container in detached mode if you haven't already, assuming you already built the Docker image from [Installation](#installation)
+   ```
+   docker run -d -p 3000:3000 hire-richard-bui
+   ```
+2. Access the container's CLI within Docker Desktop
+   ```
+   docker ps
+   ```
+3. Run the command line
+   ```
+   rails test
+   ```
+</details>
+  
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Usage
@@ -143,18 +150,45 @@ You have every component of the **CRUD** actions in the first page where the but
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Feature
-Chosen feature:
 > Ability to generate a report on inventory levels over time, like: most in-stock or out-of-stock last month
-  
+
+The report table is able to display various metrics, including most in-stock and out-of-stock for each month of the selected year.
 <p align="center">
   <img src="https://user-images.githubusercontent.com/43472079/150085876-10d6918f-0201-4a03-8bab-cbebc248ccab.png" />
 </p>
+
+### Reason
+I believe that this feature would give you a glimpse of my analytical skills.
+
+### Mechanic
+The report is based off of the logs generated whenever an item is created or edited. In normal time, they would be timestamped with the date of execution but a few logs for the year 2021 has been seeded for demonstration purposes.  These logs would then be extracted in the report model and compiled into different metrics. Improvement of the feature can be easily made which is described in the [Thoughts and Improvements](#thoughts-and-improvements) section.
+
+### Metrics
+- Most Stocked Item
+  - Item with the highest quantity at any given log time within the month. If the item quantity went from 10 to 5 within the month, the higher quantity will be considered against others
+- Highest Revenue
+  - Item with the highest revenue (quantity x price) at any given log time within the month. If the item revenue went from (12 x 4.99) to (3 x 4.99) within the month, the higher one will be considered against others
+- Most Stocked Brand*
+  - Brand with the most stocked item within the month
+- Most Stocked Category*
+  - Category with the most stocked item within the month
+- Least Stocked Item
+  - Opposite of Most Stocked Item
+- Lowest Revenue
+  - Opposite of Highest Revenue
+- Least Stocked Brand*
+  - Opposite of Most Stocked Brand
+- Least Stocked Category*
+  - Opposite of Most Stocked Category
+  
+*If the item was logged more than once (e.g.: quantity was edited multiple times) within the month, then the average of those quantities for the same item will be calculated.
+
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## Thoughts and Improvements
 
 Some improvements I could do for the next time:
-- improve
+- feature, log every day
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
