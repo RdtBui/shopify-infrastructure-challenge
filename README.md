@@ -10,7 +10,9 @@
               |_|       |___|                            |___|  
 </p>
 </pre>                                                                                                                                                                           
-[Quick Demo](http://34.72.158.92:3000/) hosted with Google Cloud Platform. Be careful, if you write mean things on the website I can see them in the database.
+[~~Quick Demo~~](http://34.72.158.92:3000/) hosted with Google Cloud Platform. Be careful, if you write mean things on the website I can see them in the database.
+
+Note: The demo has been taken down because the challenge is over.
 ## Table of Contents
 
 - [About the Project](#about-the-project)
